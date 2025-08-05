@@ -11,6 +11,7 @@ import hoodie from './Hoodie Picture.jpg'
 import topPavillion from './Tshirt Picture from Unsplash.jpg'
 import sweater from './Tshirt Picture Unsplash.jpg'
 import greenTop from './White Crew Neck Shirt.jpg'
+import fqaimg from './FAQ IMAGE-Photoroom 1.png'
 
 const assets = {
   roundNeck,
@@ -25,7 +26,8 @@ const assets = {
   hoodie,
   topPavillion,
   sweater,
-  greenTop
+  greenTop,
+  fqaimg
 }
 
 export default assets;
