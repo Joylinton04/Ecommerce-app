@@ -5,6 +5,12 @@ import jeans2 from './Denim Bottoms Photo.jpg'
 import airForce from './Shoe Picture from Unsplash (1).jpg'
 import puma from './Shoe Picture from Unsplash.jpg'
 import headerImg from './Nike Air Force 1 High.jpg'
+import blackTop from './Black and White T-Shirt Photo.jpg'
+import whiteT from './Hoodie Picture from Unsplash.jpg'
+import hoodie from './Hoodie Picture.jpg'
+import topPavillion from './Tshirt Picture from Unsplash.jpg'
+import sweater from './Tshirt Picture Unsplash.jpg'
+import greenTop from './White Crew Neck Shirt.jpg'
 
 const assets = {
   roundNeck,
@@ -13,7 +19,13 @@ const assets = {
   jeans2,
   airForce,
   puma,
-  headerImg
+  headerImg,
+  blackTop,
+  whiteT,
+  hoodie,
+  topPavillion,
+  sweater,
+  greenTop
 }
 
 export default assets;
