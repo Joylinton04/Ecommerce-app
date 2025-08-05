@@ -66,3 +66,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+.active {
+  background-color: black;
+  color: white;
+  padding: 0.25rem 0.5rem;
+}
