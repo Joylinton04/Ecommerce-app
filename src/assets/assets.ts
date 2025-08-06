@@ -12,6 +12,10 @@ import topPavillion from './Tshirt Picture from Unsplash.jpg'
 import sweater from './Tshirt Picture Unsplash.jpg'
 import greenTop from './White Crew Neck Shirt.jpg'
 import fqaimg from './FAQ IMAGE-Photoroom 1.png'
+import fqa1 from './uifaces-popular-image (1) 1.png'
+import fqa2 from './uifaces-popular-image (2) 1.png'
+import fqa3 from './uifaces-popular-image 1.png'
+import star from './star.svg'
 
 const assets = {
   roundNeck,
@@ -27,7 +31,11 @@ const assets = {
   topPavillion,
   sweater,
   greenTop,
-  fqaimg
+  fqaimg,
+  fqa1,
+  fqa2,
+  fqa3,
+  star
 }
 
 export default assets;
