@@ -26,7 +26,7 @@ const Navbar = () => {
           </NavLink>
         ))}
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 cursor-pointer">
         <span className="p-5 h-6 w-6 hover:bg-black transition-all duration-300 grid place-content-center rounded-full hover:text-white">
           <User className="hover:text-white" />
         </span>
