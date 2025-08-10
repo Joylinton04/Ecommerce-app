@@ -94,17 +94,17 @@ const Categories = () => {
   ];
 
   return (
-    <div className="min-h-screen font-body max-w-[1440px] mx-auto px-14 lgg:px-6 ssm:px-7 relative">
+    <div className="min-h-screen font-body max-w-[1440px] mx-auto px-14 lgg:px-6 ssm:px-4 relative">
       <div className="flex gap-12 mt-10 lgg:gap-6">
         {/* FILTERS */}
-        <div className="w-[280px] h-full sticky top-6 pb-6">
-          <h1 className="text-2xl font-heading">FILTER</h1>
+        <div className="w-[280px] h-full sticky top-6 pb-6 ssm:hidden">
+          <h1 className="text-2xl font-heading ssm:text-base">FILTER</h1>
           <div className="border p-4 mt-2">
-            <h4 className="uppercase bg-black text-white px-2 text-center">
+            <h4 className="uppercase bg-black text-white px-2 text-center ssm:text-sm">
               Categories
             </h4>
             <div className="flex flex-col gap-6">
-              <div className="flex flex-col gap-2 pt-2">
+              <div className="flex flex-col gap-2 pt-2 ssm:text-xs">
                 <div className="flex items-center gap-3">
                   <Checkbox id="men" />
                   <label htmlFor="men">Menu</label>
@@ -121,10 +121,10 @@ const Categories = () => {
             </div>
           </div>
           <div className="border p-4 mt-6">
-            <h4 className="uppercase bg-black text-white px-2 text-center">
+            <h4 className="uppercase bg-black text-white px-2 text-center ssm:text-xs">
               SUB CATEGORIES
             </h4>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 ssm:text-xs">
               <div className="flex flex-col gap-2 pt-2">
                 <div className="flex items-center gap-3">
                   <Checkbox id="topwear" />
@@ -145,9 +145,9 @@ const Categories = () => {
 
         {/* product lists */}
         <div className="w-full">
-          <div className="flex justify-between gap-4 items-center -mt-2">
+          <div className="flex justify-between gap-4 items-center -mt-2 ssm:flex-wrap ssm:gap-2">
             <div className="flex items-center gap-4">
-              <h1 className="font-heading text-2xl ssm:text-lg ssm:pb-2 uppercase mdd:text-lg">
+              <h1 className="font-heading text-2xl ssm:pb-2 uppercase mdd:text-lg ssm:text-sm">
                 All Collections
               </h1>
               <span className="block h-[0.2rem] w-20 mdd:w-8 bg-black"></span>
