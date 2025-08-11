@@ -119,7 +119,7 @@ const Home = () => {
                 </p>
               </div>
               <button className="flex items-center gap-6 px-6 py-3 bg-white text-black font-semibold rounded-full transition-colors hover:bg-gray-200 w-fit mt-4">
-                <span className="text-lg">Shop Now</span>
+                <span className="text-lg ssm:text-sm">Shop Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
