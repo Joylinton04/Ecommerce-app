@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProductTitle from "@/components/ProductTitle";
 import assets from "@/assets/assets";
 import ProductCard from "@/components/ProductCard";
@@ -94,6 +94,7 @@ const Home = () => {
     },
   ];
 
+
   return (
     <div className="w-full font-body">
       
@@ -158,7 +159,7 @@ const Home = () => {
               key={index}
               img={product.img}
               price={product.price}
-              text={product.text}
+              title={product.text}
             />
           ))}
         </div>
@@ -176,7 +177,7 @@ const Home = () => {
               key={index}
               img={product.img}
               price={product.price}
-              text={product.text}
+              title={product.text}
             />
           ))}
         </div>

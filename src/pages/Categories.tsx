@@ -8,9 +8,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { ArrowDown, ChevronsUp } from "lucide-react";
+import { useEffect, useState } from "react";
+
+interface ProductProp {
+  id: number | string;
+  title: string;
+  image: string;
+  price: number;
+}
 
 const Categories = () => {
+  // const [products, setProducts] = useState<ProductProp[]>([]);
+
+  const { isPending, error, data:products } = useQuery({
+    queryKey: ['products'],
+    queryFn: () =>
+      axios.get<ProductProp[]>(
+        "https://fakestoreapi.com/products"
+      ).then(res => res.data),
+    staleTime: 5000,  
+  })
+
+  if(isPending) return <p className="p-20 text-center">loading...</p>
+
   const allProducts = [
     {
       img: assets.whiteTShirt,
@@ -156,7 +179,7 @@ const Categories = () => {
             {/* filter mobile screen */}
             <div className="ssm:flex gap-2 hidden ssm:text-sm bg-black px-4 py-2 text-white">
               <span>CATEGORIES</span>
-              <ChevronsUp className="rotate-180"/>
+              <ChevronsUp className="rotate-180" />
             </div>
             <Select>
               <SelectTrigger className="w-[200px] mdd:w-[160px]">
@@ -173,12 +196,20 @@ const Categories = () => {
           {/* products */}
           <div className="pb-10 pt-3 ssm:pt-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 ssm:flex ssm:flex-col ssm:items-center">
-              {allProducts.map((product, index) => (
+              {/* {allProducts.map((product, index) => (
                 <ProductCard
                   key={index}
                   img={product.img}
                   price={product.price}
-                  text={product.text}
+                  title={product.text}
+                />
+              ))} */}
+              {products?.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  img={product.image}
+                  price={product.price}
+                  title={product.title}
                 />
               ))}
             </div>
