@@ -2,15 +2,15 @@ import React from 'react'
 
 interface prop {
     img: string,
-    text: string,
+    title: string,
     price: number
 }
 
-const ProductCard = ({img, text, price}: prop) => {
+const ProductCard = ({img, title, price}: prop) => {
     return (
         <div className='flex flex-col cursor-pointer'>
             <img src={img} className='w-[260px] h-[300px] ssm:w-[300px] object-cover object-center'/>
-            <p className='capitalize py-1'>{text}</p>
+            <p className='capitalize py-1'>{title}</p>
             <h3 className='font-bold'>${price}</h3>
         </div>
     )
