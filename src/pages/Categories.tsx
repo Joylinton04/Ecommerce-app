@@ -1,6 +1,5 @@
 import assets from "@/assets/assets";
 import ProductCard from "@/components/ProductCard";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
@@ -10,9 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { ArrowDown, ArrowLeft, ArrowRight, ChevronsUp } from "lucide-react";
-import { useState } from "react";
+import { ChevronsUp } from "lucide-react";
 
 interface ProductProp {
   id: number | string;
