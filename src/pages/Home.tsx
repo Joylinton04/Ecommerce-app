@@ -94,10 +94,8 @@ const Home = () => {
     },
   ];
 
-
   return (
     <div className="w-full font-body">
-      
       {/* section 1 */}
       <div className="h-[672px] bg-gradient-to-tl from-cyan-500/30">
         <div className="max-w-[1440px] mx-auto flex items-center justify-start h-full p-16 lgg:p-10 mdd:p-4">
@@ -148,15 +146,16 @@ const Home = () => {
       </div>
 
       {/* Latest Arrivals */}
-      <div className="flex flex-col px-14 py-4 max-w-[1440px] mx-auto ssm:px-7">
+      <div className="flex flex-col px-14 py-4 max-w-[1440px] mx-auto ssm:px-4">
         <ProductTitle
           title="LATEST ARRIVAL"
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestias ipsum esse nobis aliquam dolores eveniet eaque necessitatibus ex voluptates. Delectus quam enim, dolor"
         />
-        <div className="flex flex-wrap gap-12 mt-10 ssm:justify-center">
+        <div className="flex flex-wrap gap-12 ssm:gap-8 mt-10">
           {latestProduct.map((product, index) => (
             <ProductCard
               key={index}
+              id={index}
               img={product.img}
               price={product.price}
               title={product.text}
@@ -166,14 +165,15 @@ const Home = () => {
       </div>
 
       {/* Best seller */}
-      <div className="flex flex-col px-14 py-4 max-w-[1440px] mx-auto ssm:px-7 mt-20">
+      <div className="flex flex-col px-14 py-4 max-w-[1440px] mx-auto ssm:px-4 mt-20">
         <ProductTitle
           title="BEST SELLER"
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestias ipsum esse nobis aliquam dolores eveniet eaque necessitatibus ex voluptates. Delectus quam enim, dolor"
         />
-        <div className="flex flex-wrap gap-12 mt-10 ssm:justify-center">
+        <div className="flex flex-wrap gap-12 ssm:gap-8 mt-10">
           {Bestsellers.map((product, index) => (
             <ProductCard
+              id={index}
               key={index}
               img={product.img}
               price={product.price}
@@ -185,24 +185,32 @@ const Home = () => {
 
       {/* section 3 */}
       <div className="mt-20 bg-[#B6B09F]">
-        <div className="px-14 py-6 max-w-[1440px] mx-auto ssm:px-7 flex gap-4 justify-between">
+        <div className="px-14 py-6 max-w-[1440px] mx-auto ssm:px-4 flex gap-4 justify-between">
           <div className="flex flex-col gap-1">
-            <h1 className="font-bold font-heading text-8xl mdd:text-5xl ssm:text-4xl">50+</h1>
+            <h1 className="font-bold font-heading text-8xl mdd:text-5xl ssm:text-4xl">
+              50+
+            </h1>
             <p className="text-sm ssm:text-xs">Trusted Customers</p>
           </div>
           <div className="flex flex-col gap-1">
-            <h1 className="font-bold font-heading text-8xl mdd:text-5xl ssm:text-4xl">99%</h1>
-            <p className="text-sm ssm:text-xs text-center">Assured of secured payments</p>
+            <h1 className="font-bold font-heading text-8xl mdd:text-5xl ssm:text-4xl">
+              99%
+            </h1>
+            <p className="text-sm ssm:text-xs text-center">
+              Assured of secured payments
+            </p>
           </div>
           <div className="flex flex-col gap-1">
-            <h1 className="font-bold font-heading text-8xl mdd:text-5xl ssm:text-4xl">2K</h1>
+            <h1 className="font-bold font-heading text-8xl mdd:text-5xl ssm:text-4xl">
+              2K
+            </h1>
             <p className="text-sm ssm:text-xs">Customers Worldwide</p>
           </div>
         </div>
       </div>
 
       {/* FAQ */}
-      <div className="mt-20 px-14 py-4 max-w-[1440px] mx-auto ssm:px-7">
+      <div className="mt-20 px-14 py-4 max-w-[1440px] mx-auto ssm:px-4">
         <ProductTitle
           title="FREQUENTLY ASKED QUESTIONS"
           text="Got questions? We've got the answers you need right here!"
@@ -220,14 +228,17 @@ const Home = () => {
       </div>
 
       {/* customer review */}
-      <div className="mt-20 px-14 py-4 max-w-[1440px] mx-auto ssm:px-7">
+      <div className="mt-20 px-14 py-4 max-w-[1440px] mx-auto ssm:px-4">
         <ProductTitle
           title="CUSTOMERS REVIEW"
           text="See what our valued customers are saying about their experiences!"
         />
         <div className="flex flex-col gap-20 mt-10">
           <div className="flex gap-4">
-            <img src={assets.fqa1} className="w-[251px] ssm:w-full object-cover object-center" />
+            <img
+              src={assets.fqa1}
+              className="w-[251px] ssm:w-full object-cover object-center"
+            />
             <div className="flex flex-col gap-4 justify-between">
               <p className="text-xl mdd:text-base ssm:text-sm">
                 Fast shipping and great packaging! My order arrived in perfect
@@ -240,11 +251,16 @@ const Home = () => {
                 <img src={assets.star} className="w-10" />
               </div>
               <span className="block h-1 bg-black"></span>
-              <h1 className="font-bold text-xl mdd:text-base ssm:text-sm">Mariana Van Zeeler</h1>
+              <h1 className="font-bold text-xl mdd:text-base ssm:text-sm">
+                Mariana Van Zeeler
+              </h1>
             </div>
           </div>
           <div className="flex gap-4">
-            <img src={assets.fqa2} className="w-[251px] ssm:w-full object-cover object-center" />
+            <img
+              src={assets.fqa2}
+              className="w-[251px] ssm:w-full object-cover object-center"
+            />
             <div className="flex flex-col gap-4 justify-between">
               <p className="text-xl mdd:text-base ssm:text-sm">
                 Fast shipping and great packaging! My order arrived in perfect
@@ -257,11 +273,16 @@ const Home = () => {
                 <img src={assets.star} className="w-10" />
               </div>
               <span className="block h-1 bg-black"></span>
-              <h1 className="font-bold text-xl mdd:text-base ssm:text-sm">Mariana Van Zeeler</h1>
+              <h1 className="font-bold text-xl mdd:text-base ssm:text-sm">
+                Mariana Van Zeeler
+              </h1>
             </div>
           </div>
           <div className="flex gap-4">
-            <img src={assets.fqa3} className="w-[251px] ssm:w-full object-cover object-center" />
+            <img
+              src={assets.fqa3}
+              className="w-[251px] ssm:w-full object-cover object-center"
+            />
             <div className="flex flex-col gap-4 justify-between">
               <p className="text-xl mdd:text-base ssm:text-sm">
                 Fast shipping and great packaging! My order arrived in perfect
@@ -274,14 +295,16 @@ const Home = () => {
                 <img src={assets.star} className="w-10" />
               </div>
               <span className="block h-1 bg-black"></span>
-              <h1 className="font-bold text-xl mdd:text-base ssm:text-sm">Mariana Van Zeeler</h1>
+              <h1 className="font-bold text-xl mdd:text-base ssm:text-sm">
+                Mariana Van Zeeler
+              </h1>
             </div>
           </div>
         </div>
       </div>
       {/* newsletter subscribe section */}
       <div className="mt-20 bg-[#B6B09F] flex items-center justify-center">
-        <div className="px-14 py-20 max-w-[1440px] mx-auto ssm:px-7 flex flex-col gap-4">
+        <div className="px-14 py-20 max-w-[1440px] mx-auto ssm:px-4 flex flex-col gap-4">
           <h1 className="font-heading3 text-6xl text-center ssm:text-5xl">
             Stay in the loop!
           </h1>

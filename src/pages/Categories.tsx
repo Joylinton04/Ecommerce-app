@@ -8,8 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useQuery } from "@tanstack/react-query";
-import { ChevronsUp } from "lucide-react";
+import { Settings2 } from "lucide-react";
 
 interface ProductProp {
   id: number | string;
@@ -170,6 +169,7 @@ const Categories = () => {
 
         {/* product lists */}
         <div className="w-full">
+          <h1 className="hidden ssm:block text-2xl font-heading pb-12">Products</h1>
           <div className="flex justify-between gap-4 items-center -mt-2 ssm:flex-wrap ssm:gap-2">
             <div className="flex items-center gap-4 ssm:hidden">
               <h1 className="font-heading text-2xl ssm:pb-2 uppercase mdd:text-lg ssm:text-sm">
@@ -178,25 +178,26 @@ const Categories = () => {
               <span className="block h-[0.2rem] w-20 mdd:w-8 bg-black"></span>
             </div>
             {/* filter mobile screen */}
-            <div className="ssm:flex gap-2 hidden ssm:text-sm bg-black px-4 py-2 text-white">
-              <span>CATEGORIES</span>
-              <ChevronsUp className="rotate-180" />
+            <div className="ssm:flex gap-2 hidden ssm:text-sm py-2">
+              <Settings2 size={16} />
+              <h1 className="text-sm hover:underline">Filter and Sort</h1>
             </div>
-            <Select>
-              <SelectTrigger className="w-[200px] mdd:w-[160px]">
-                <SelectValue placeholder="Sort by: " />
+            <h1 className="text-xs text-gray-500">537 products</h1>
+            {/* <Select>
+              <SelectTrigger className="w-[200px] mdd:w-[160px] h-[30px]">
+                <SelectValue placeholder="Sort by: "/>
               </SelectTrigger>
-              <SelectContent className="font-body">
+              <SelectContent className="font-body text-sm">
                 <SelectItem value="price-asc">Price: Low to High</SelectItem>
                 <SelectItem value="price-desc">Price: High to Low</SelectItem>
                 <SelectItem value="date-asc">Date: Old to New</SelectItem>
                 <SelectItem value="date-desc">Date: New to Old</SelectItem>
               </SelectContent>
-            </Select>
+            </Select> */}
           </div>
           {/* products */}
-          <div className="pb-10 pt-3 ssm:pt-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 ssm:flex ssm:flex-col ssm:items-center">
+          <div className="pb-10 ssm:pt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 ssm:flex ssm:flex-wrap ssm:items-center ssm:gap-8">
               {allProducts.map((product, index) => (
                 <ProductCard
                   key={index}
