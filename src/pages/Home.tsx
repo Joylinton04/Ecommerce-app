@@ -151,7 +151,7 @@ const Home = () => {
           title="LATEST ARRIVAL"
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestias ipsum esse nobis aliquam dolores eveniet eaque necessitatibus ex voluptates. Delectus quam enim, dolor"
         />
-        <div className="flex flex-wrap gap-12 ssm:gap-8 mt-10">
+        <div className="flex flex-wrap gap-4 ssm:gap-8 mt-10">
           {latestProduct.map((product, index) => (
             <ProductCard
               key={index}
@@ -170,7 +170,7 @@ const Home = () => {
           title="BEST SELLER"
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestias ipsum esse nobis aliquam dolores eveniet eaque necessitatibus ex voluptates. Delectus quam enim, dolor"
         />
-        <div className="flex flex-wrap gap-12 ssm:gap-8 mt-10">
+        <div className="flex flex-wrap gap-4 ssm:gap-8 mt-10">
           {Bestsellers.map((product, index) => (
             <ProductCard
               id={index}
