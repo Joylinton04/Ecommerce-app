@@ -32,19 +32,21 @@ const Navbar = () => {
             <User className="hover:text-white" />
           </span>
           <span className="p-5 h-6 w-6 bg-black transition-all duration-300 grid place-content-center rounded-full hover:text-white">
-            <ShoppingCart className="text-white" />
+            <Link to="cart">
+              <ShoppingCart className="text-white" />
+            </Link>
           </span>
         </div>
       </div>
       <div className="hidden ssm:block">
-        <h2 className="bg-[#2D3D4E] text-center text-xs text-white px-6 py-2 font-heading">
+        <h2 className="bg-[#2D3D4E] text-center text-xs text-white px-6 py-2 font-heading sticky top-0">
           Welcome to our store
         </h2>
         <div className="flex items-center justify-between bg-[#1c2228] px-6 py-3">
           <div>
             <MenuIcon color="#ffff" />
           </div>
-          <div className="font-heading text-white italic">
+          <div className="font-heading font-bold text-white italic">
             <Link to="/">ECOM</Link>
           </div>
           <span className="p-5 h-6 w-6 transition-all duration-300 grid place-content-center rounded-full hover:text-white">
