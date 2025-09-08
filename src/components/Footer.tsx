@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-black text-white font-body">
       <div className="py-20 max-w-[1440px] mx-auto px-14 flex mdd:flex-col flex-row justify-between gap-12 ssm:px-6">
         <div className="flex flex-col gap-6 w-full md:w-1/3">
           <h3 className="font-heading font-extrabold text-3xl">ECOM</h3>
