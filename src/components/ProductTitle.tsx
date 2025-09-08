@@ -2,7 +2,7 @@ import React from 'react'
 
 interface prop {
     title: string,
-    text: string
+    text?: string
 }
 
 const ProductTitle = ({ title, text }: prop) => {
