@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { MenuIcon, ShoppingCart, User } from "lucide-react";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -6,7 +7,7 @@ const Navbar = () => {
   const navLinks = [
     { path: "/", to: "Home" },
     { path: "/categories", to: "Categories" },
-    { path: "/about", to: "About" },
+    { path: "/about-us", to: "About" },
     { path: "/contact", to: "Contact" },
   ];
 
@@ -16,12 +17,20 @@ const Navbar = () => {
         <h1 className="font-heading text-3xl font-semibold italic cursor-pointer">
           <a href="/">ECOM</a>
         </h1>
-        <div className="flex items-center gap-4 ssm:hidden">
+        <div className="flex items-center gap-4 ssm:hidden relative">
           {navLinks.map((Link, index) => (
             <NavLink
-              className={`transition-all duration-300 py-1 hover:px-2 hover:bg-black hover:text-white rounded-full`}
-              to={Link.path}
               key={index}
+              to={Link.path}
+              className={({ isActive }) =>
+                cn(
+                  "relative inline-block px-2 py-1",
+                  "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-[2px] before:w-0 before:bg-black before:transition-all before:duration-300 hover:before:w-full",
+                  isActive
+                    ? "text-black font-semibold before:w-full"
+                    : "text-gray-600 hover:text-black before:w-0 hover:before:w-full"
+                )
+              }
             >
               {Link.to}
             </NavLink>
