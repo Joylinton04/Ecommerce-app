@@ -19,7 +19,7 @@ const ProductCard = ({ img, title, price, id }: prop) => {
         <img
           loading="lazy"
           src={img}
-          className=" w-full ssm:h-[240px] h-[300px] object-cover object-center"
+          className="w-full ssm:h-[240px] h-[300px] object-cover object-center"
         />
       </Link>
       <p className="capitalize py-1 ssm:text-sm">{title}</p>
