@@ -6,6 +6,8 @@ import Categories from "@/pages/Categories";
 import Product from "@/pages/Product";
 import Cart from "@/pages/Cart";
 import Order from "@/pages/Order";
+import About from "@/pages/About";
+import Contact from "@/pages/Contact";
 
 const Approute = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const Approute = createBrowserRouter([
       {
         path: 'order',
         element: <Order/>,
+      },
+      {
+        path: 'about-us',
+        element: <About/>,
+      },
+      {
+        path: 'contact',
+        element: <Contact/>,
       },
     ],
   },
