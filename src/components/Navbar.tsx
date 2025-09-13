@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { useAppContext } from "@/store/ContextApi";
 import { MenuIcon, ShoppingCart, User } from "lucide-react";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -11,9 +12,11 @@ const Navbar = () => {
     { path: "/contact", to: "Contact" },
   ];
 
+  const { cartQuantity } = useAppContext();
+
   return (
     <>
-      <div className="max-w-[1440px] mx-auto px-14 py-4 flex items-center justify-between font-body lgg:px-6 border-b ssm:hidden">
+      <div className="max-w-[1440px] mx-auto px-14 py-4 flex items-center justify-between font-body lgg:px-6 border-b ssm:hidden sticky top-0 bg-white z-20">
         <h1 className="font-heading text-3xl font-semibold italic cursor-pointer">
           <a href="/">ECOM</a>
         </h1>
@@ -40,9 +43,14 @@ const Navbar = () => {
           <span className="p-5 h-6 w-6 hover:bg-black transition-all duration-300 grid place-content-center rounded-full hover:text-white">
             <User className="hover:text-white" />
           </span>
-          <span className="p-5 h-6 w-6 bg-black transition-all duration-300 grid place-content-center rounded-full hover:text-white">
+          <span className="p-5 h-6 w-6 bg-black transition-all duration-300 grid place-content-center rounded-full relative">
             <Link to="cart">
               <ShoppingCart className="text-white" />
+              {cartQuantity > 0 && (
+                <span className="grid place-content-center absolute -top-2 right-0 w-6 h-6 bg-black text-white rounded-full text-sm">
+                  {cartQuantity}
+                </span>
+              )}
             </Link>
           </span>
         </div>
@@ -58,7 +66,7 @@ const Navbar = () => {
           <div className="font-heading font-bold text-white italic">
             <Link to="/">ECOM</Link>
           </div>
-          <span className="p-5 h-6 w-6 transition-all duration-300 grid place-content-center rounded-full hover:text-white">
+          <span className="p-5 h-6 w-6 transition-all duration-300 grid place-content-center rounded-full hover:text-white relative">
             <ShoppingCart className="text-white" />
           </span>
         </div>
