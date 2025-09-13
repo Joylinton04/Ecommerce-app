@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
 import ProductTitle from "@/components/ProductTitle";
 import assets from "@/assets/assets";
 import ProductCard from "@/components/ProductCard";
-import Navbar from "@/components/Navbar";
 import AccordianSec from "@/components/AccordianSec";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Footer from "@/components/Footer";
+import { motion, spring } from "framer-motion";
+import { useAppContext } from "@/store/ContextApi";
 
 const Home = () => {
+  // const {user} = useAppContext();
+
+
+
+
+
   const latestProduct = [
     {
       img: assets.whiteTShirt,
@@ -94,30 +97,98 @@ const Home = () => {
     },
   ];
 
+
+  const containerVariants = {
+    hidden: { opacity: 1 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.4,
+      },
+    },
+  };
+
+  const containerVariants2 = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.4,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 1, ease: "easeOut" },
+    },
+  };
+
   return (
     <div className="w-full font-body">
       {/* section 1 */}
       <div className="h-[672px] bg-gradient-to-tl from-cyan-500/30">
         <div className="max-w-[1440px] mx-auto flex items-center justify-start h-full p-16 lgg:p-10 mdd:p-4">
+          {/* main  */}
           <div className="px-10 flex flex-col justify-center items-start w-1/2 h-full ssm:w-full">
-            <div className="flex flex-col gap-6">
+            <motion.div
+              variants={containerVariants2}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="flex flex-col gap-6"
+            >
+              {/* Title Row */}
               <div className="flex items-center gap-6">
-                <span className="block h-[0.1rem] w-12 bg-black"></span>
-                <h1 className="font-heading text-2xl font-bold uppercase lgg:text-lg">
+                <motion.span
+                  initial={{ x: "-100%", opacity: 0 }}
+                  animate={{
+                    x: "0%",
+                    opacity: 1,
+                    transition: { duration: 1 },
+                  }}
+                  className="block h-[0.1rem] w-12 bg-black"
+                ></motion.span>
+                <motion.h1
+                  initial={{ x: "-100%", opacity: 0 }}
+                  animate={{
+                    x: "0%",
+                    opacity: 1,
+                    transition: { duration: 1.7, type: spring, stiffness: 80 },
+                  }}
+                  className="font-heading text-2xl font-bold uppercase lgg:text-lg"
+                >
                   Our Bestsellers
-                </h1>
+                </motion.h1>
               </div>
+
+              {/* Heading & Paragraph */}
               <div className="flex flex-col gap-4">
-                <div className="font-heading font-extrabold text-6xl leading-tight lgg:text-5xl mdd:text-4xl">
+                <motion.div
+                  variants={itemVariants}
+                  className="font-heading font-extrabold text-6xl leading-tight lgg:text-5xl mdd:text-4xl"
+                >
                   LIMITED TIME OFFER! UP TO 50% OFF
-                </div>
-                <p className="text-lg leading-relaxed lgg:text-base">
+                </motion.div>
+
+                <motion.p
+                  variants={itemVariants}
+                  className="text-lg leading-relaxed lgg:text-base"
+                >
                   Explore our best-selling products and discover why everyone is
                   talking about them. This is a limited-time opportunity to get
                   your favorites at an incredible price.
-                </p>
+                </motion.p>
               </div>
-              <button className="flex items-center gap-6 px-6 py-3 bg-white text-black font-semibold rounded-full transition-colors hover:bg-gray-200 w-fit mt-4">
+
+              {/* Button */}
+              <motion.button
+                variants={itemVariants}
+                className="flex items-center gap-6 px-6 py-3 bg-white text-black font-semibold rounded-full 
+                   transition-colors hover:bg-gray-200 w-fit mt-4 shadow-lg"
+              >
                 <span className="text-lg ssm:text-sm">Shop Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -133,9 +204,10 @@ const Home = () => {
                     d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
                   />
                 </svg>
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           </div>
+
           <div className="w-1/2 h-full rounded-2xl overflow-hidden shadow-2xl lgg:h-[28rem] mdd:h-[25rem] ssm:hidden">
             <img
               src={assets.headerImg}
@@ -151,7 +223,13 @@ const Home = () => {
           title="LATEST ARRIVAL"
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestias ipsum esse nobis aliquam dolores eveniet eaque necessitatibus ex voluptates. Delectus quam enim, dolor"
         />
-        <div className="flex flex-wrap gap-4 ssm:gap-8 mt-10">
+        {/* Cards container */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="flex flex-wrap gap-4 ssm:gap-8 mt-10"
+        >
           {latestProduct.map((product, index) => (
             <ProductCard
               key={index}
@@ -161,7 +239,7 @@ const Home = () => {
               title={product.text}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Best seller */}
@@ -170,7 +248,12 @@ const Home = () => {
           title="BEST SELLER"
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis molestias ipsum esse nobis aliquam dolores eveniet eaque necessitatibus ex voluptates. Delectus quam enim, dolor"
         />
-        <div className="flex flex-wrap gap-4 ssm:gap-8 mt-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="flex flex-wrap gap-4 ssm:gap-8 mt-10"
+        >
           {Bestsellers.map((product, index) => (
             <ProductCard
               id={index}
@@ -180,7 +263,7 @@ const Home = () => {
               title={product.text}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* section 3 */}
