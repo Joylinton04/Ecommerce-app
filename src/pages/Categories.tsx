@@ -1,6 +1,7 @@
 import assets from "@/assets/assets";
 import ProductCard from "@/components/ProductCard";
 import { Checkbox } from "@/components/ui/checkbox";
+import { motion } from "framer-motion";
 import {
   Select,
   SelectContent,
@@ -117,6 +118,16 @@ const Categories = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 1 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen font-body max-w-[1440px] mx-auto px-14 lgg:px-6 ssm:px-4 relative">
       <div className="flex gap-12 mt-10 lgg:gap-6 ssm:block">
@@ -169,7 +180,9 @@ const Categories = () => {
 
         {/* product lists */}
         <div className="w-full">
-          <h1 className="hidden ssm:block text-2xl font-heading pb-12">Products</h1>
+          <h1 className="hidden ssm:block text-2xl font-heading pb-12">
+            Products
+          </h1>
           <div className="flex justify-between gap-4 items-center -mt-2 ssm:flex-wrap ssm:gap-2">
             <div className="flex items-center gap-4 ssm:hidden">
               <h1 className="font-heading text-2xl ssm:pb-2 uppercase mdd:text-lg ssm:text-sm">
@@ -197,7 +210,13 @@ const Categories = () => {
           </div>
           {/* products */}
           <div className="pb-10 ssm:pt-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 ssm:flex ssm:flex-wrap ssm:items-center ssm:gap-8">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              viewport={{ amount: 0.2 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 ssm:flex ssm:flex-wrap ssm:items-center ssm:gap-8"
+            >
               {allProducts.map((product, index) => (
                 <ProductCard
                   key={index}
@@ -215,7 +234,7 @@ const Categories = () => {
                   title={product.title}
                 />
               ))} */}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

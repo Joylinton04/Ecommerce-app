@@ -19,6 +19,7 @@ const AccordianSec = () => {
     <div className="w-1/2 flex flex-col justify-between mdd:gap-6 ssm:w-full">
       {accordion.map((info, index) => (
         <Accordion
+          key={index}
           type="single"
           collapsible
           className="w-full bg-[#B6B09F]/80 backdrop-blur-md shadow-md border border-[#b6b09f]/40"
