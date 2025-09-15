@@ -16,19 +16,31 @@ import {
 } from "@/components/ui/table";
 
 interface prop {
-  id: number;
+  id: string;
   img: string;
   title: string;
   price: number;
 }
+
+interface cartItem {
+  productId: string;
+  quantity: number;
+  size: string;
+}
+
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const ProductCard = ({ img, title, price, id }: prop) => {
-  const { addToCartQuantity } = useAppContext();
+  const {cartQuantity, addToCart, removeFromCart } = useAppContext();
   const [showOptions, setShowOptions] = useState(false);
+  const [cartItem, setCartItem] = useState<cartItem>({
+    productId: "",
+    quantity: 0,
+    size: "",
+  })
 
   // Store variant quantities in an object keyed by size
   const [quantities, setQuantities] = useState<Record<string, number>>({
@@ -41,9 +53,26 @@ const ProductCard = ({ img, title, price, id }: prop) => {
   // Handle quantity change dynamically
   const handleQuantityChange = (size: string, delta: number) => {
     setQuantities((prev) => {
-      const newQty = Math.max(0, (prev[size] ?? 0) + delta); // no negative qty
+      const newQty = Math.max(0, (prev[size] ?? 0) + delta);
       return { ...prev, [size]: newQty };
     });
+    switch(delta) {
+      case 1:
+        // 
+        const cartItem:cartItem = {
+          productId: id,
+          quantity: delta,
+          size: size
+        }
+        addToCart({...cartItem})
+        break;
+        case -1:
+          if(quantities[size] === 0) return;
+          removeFromCart(id)
+          break;
+      default:
+        break;
+    }
   };
 
   const variants = [
@@ -52,6 +81,10 @@ const ProductCard = ({ img, title, price, id }: prop) => {
     { size: "XL", price: 99.99 },
     { size: "XXL", price: 99.99 },
   ];
+
+  
+
+  
 
   return (
     <>
@@ -87,11 +120,11 @@ const ProductCard = ({ img, title, price, id }: prop) => {
       {/* Modal with variants */}
       {showOptions && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 font-body p-6">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-[65rem] flex gap-6">
-            <div className="flex flex-col gap-4">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-[65rem] flex gap-6 ssm:flex-col ssm:max-w-[25rem]">
+            <div className="flex flex-col gap-4 ssm:flex-row">
               <img
                 src={assets.hoodie}
-                className="h-[200px] w-[170px] object-cover object-center rounded-sm"
+                className="h-[200px] w-[170px] object-cover object-center rounded-sm ssm:h-[100px] ssm:w-[70px]"
               />
               <div className="inline-flex items-center cursor-pointer text-xs">
                 <p className="underline">View full details</p>
@@ -150,7 +183,7 @@ const ProductCard = ({ img, title, price, id }: prop) => {
                           />
                           <button
                             onClick={() =>
-                              handleQuantityChange(variant.size, 1)
+                              handleQuantityChange(variant.size, 1,)
                             }
                             className="w-8 h-8 border rounded-md hover:bg-gray-100"
                           >
@@ -172,7 +205,7 @@ const ProductCard = ({ img, title, price, id }: prop) => {
 
               <div className="border-t py-6">
                 <Button className="bg-transparent text-black hover:text-white shadow-none rounded px-6 py-6 border w-max">
-                  View cart
+                  <Link to="/cart">View cart</Link>
                 </Button>
               </div>
             </div>
