@@ -16,7 +16,8 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="max-w-[1440px] mx-auto px-14 py-4 flex items-center justify-between font-body lgg:px-6 border-b ssm:hidden sticky top-0 bg-white z-20">
+      <div className="bg-white sticky top-0 z-20">
+        <div className="max-w-[1440px] mx-auto px-14 py-4 flex items-center justify-between font-body lgg:px-6 ssm:hidden">
         <h1 className="font-heading text-3xl font-semibold italic cursor-pointer">
           <a href="/">ECOM</a>
         </h1>
@@ -54,6 +55,7 @@ const Navbar = () => {
             </Link>
           </span>
         </div>
+      </div>
       </div>
       <div className="hidden ssm:block">
         <h2 className="bg-[#2D3D4E] text-center text-xs text-white px-6 py-2 font-heading sticky top-0">
