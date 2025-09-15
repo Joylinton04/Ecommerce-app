@@ -14,41 +14,50 @@ const Home = () => {
 
   const latestProduct = [
     {
+
+      id: "1",
       img: assets.whiteTShirt,
       price: 29.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "1",
       img: assets.airForce,
       price: 49.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "1",
       img: assets.roundNeck,
       price: 29.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "1",
       img: assets.jeans1,
       price: 59.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "1",
       img: assets.jeans2,
       price: 29.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "1",
       img: assets.whiteTShirt,
       price: 29.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "1",
       img: assets.roundNeck,
       price: 19.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "1",
       img: assets.puma,
       price: 29.99,
       text: "Men round neck pure cotten t-shirt",
@@ -56,41 +65,49 @@ const Home = () => {
   ];
   const Bestsellers = [
     {
+      id: "1",
       img: assets.blackTop,
       price: 29.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "2",
       img: assets.hoodie,
       price: 49.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "3",
       img: assets.whiteT,
       price: 29.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "4",
       img: assets.topPavillion,
       price: 59.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "5",
       img: assets.sweater,
       price: 29.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "6",
       img: assets.greenTop,
       price: 29.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "7",
       img: assets.topPavillion,
       price: 19.99,
       text: "Men round neck pure cotten t-shirt",
     },
     {
+      id: "8",
       img: assets.blackTop,
       price: 29.99,
       text: "Men round neck pure cotten t-shirt",
