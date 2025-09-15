@@ -5,15 +5,23 @@ import React, {
   ReactNode,
   type SetStateAction,
   type Dispatch,
+  useEffect,
 } from "react";
 
+interface CartItem {
+  productId: string;
+  quantity: number;
+  size: string;
+}
+
 interface AppContextProps {
-  // Define your state and actions here
   cartQuantity: number;
   setCartQuantity: Dispatch<SetStateAction<number>>;
   user: string | null;
   setUser: Dispatch<SetStateAction<string | null>>;
-  addToCartQuantity: () => void;
+  cart: CartItem[];
+  addToCart: (item: CartItem) => void;
+  removeFromCart: (productId: string) => void;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -21,9 +29,47 @@ const AppContext = createContext<AppContextProps | undefined>(undefined);
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<string | null>("linton");
   const [cartQuantity, setCartQuantity] = useState<number>(0);
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    const saved = localStorage.getItem("cart");
+    return saved ? JSON.parse(saved) : [];
+  });
 
-  const addToCartQuantity = () => {
-    setCartQuantity((cart) => cart + 1);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+  
+  // useEffect(() => {
+  //   // debounced backend sync logic
+  // },[cart])
+
+  const addToCart = ({ productId, quantity, size }: CartItem) => {
+    setCart((prevCart) => {
+      // check if product with same id & size exists
+      const existingItem = prevCart.find(
+        (item) => item.productId === productId && item.size === size
+      );
+
+      if (existingItem) {
+        // update quantity
+        return prevCart.map((item) =>
+          item.productId === productId && item.size === size
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      } else {
+        // add new item
+        return [...prevCart, { productId, quantity, size }];
+      }
+    });
+
+    setCartQuantity((cart) => Math.max(0, cart + 1));
+  };
+
+  const removeFromCart = (productId: string) => {
+    setCart((prevCart) =>
+      prevCart.filter((item) => item.productId !== productId)
+    );
+    setCartQuantity((cart) => Math.max(0, cart - 1));
   };
 
   return (
@@ -33,7 +79,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         setUser,
         cartQuantity,
         setCartQuantity,
-        addToCartQuantity,
+        cart,
+        addToCart,
+        removeFromCart,
       }}
     >
       {children}
