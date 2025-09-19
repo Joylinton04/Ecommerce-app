@@ -24,7 +24,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="pl-8 pr-4 border-r py-6 flex flex-col gap-4 min-h-screen bg-white shadow-sm">
+    <div className="pl-8 pr-4 border-r py-6 flex flex-col gap-4 min-h-screen bg-white shadow-sm ssm:pl-4">
       {nav.map((item, i) => {
         const isActive = location.pathname === item.to;
 
@@ -40,7 +40,7 @@ const Sidebar = () => {
             <div className={`p-2 rounded-full ${isActive ? "bg-white text-orange-500" : "bg-gray-50 text-gray-600"}`}>
               {item.icon}
             </div>
-            <span className="font-medium">{item.path}</span>
+            <span className="font-medium ssm:hidden">{item.path}</span>
           </Link>
         );
       })}
