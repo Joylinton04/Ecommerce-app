@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 const Product = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const sizes = ["S", "M", "L", "XL", "XXL"];
+  const sizes = ["M", "L", "XL", "XXL"];
 
   const {addToCart} = useAppContext()
 
