@@ -142,7 +142,7 @@ const Categories = () => {
               <div className="flex flex-col gap-2 pt-2 ssm:text-xs">
                 <div className="flex items-center gap-3">
                   <Checkbox id="men" />
-                  <label htmlFor="men">Menu</label>
+                  <label htmlFor="men">Men</label>
                 </div>
                 <div className="flex items-center gap-3">
                   <Checkbox id="women" />

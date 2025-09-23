@@ -328,7 +328,7 @@ const Home = () => {
       </div>
 
       {/* customer review */}
-      <div className="mt-20 px-14 py-4 max-w-[1440px] mx-auto ssm:px-4">
+      <div className="mt-20 px-14 py-8 mb-12 max-w-[1440px] mx-auto ssm:px-4">
         <ProductTitle
           title="CUSTOMERS REVIEW"
           text="See what our valued customers are saying about their experiences!"
@@ -399,28 +399,6 @@ const Home = () => {
                 Mariana Van Zeeler
               </h1>
             </div>
-          </div>
-        </div>
-      </div>
-      {/* newsletter subscribe section */}
-      <div className="mt-20 bg-[#B6B09F] flex items-center justify-center">
-        <div className="px-14 py-20 max-w-[1440px] mx-auto ssm:px-4 flex flex-col gap-4">
-          <h1 className="font-heading3 text-6xl text-center ssm:text-5xl">
-            Stay in the loop!
-          </h1>
-          <p className="text-center text-2xl w-[550px] mdd:w-full ssm:text-lg">
-            Join our newsletter for exclusive deals , and product updates. Be
-            the first to hear about our latest arrivals and promotions!
-          </p>
-          <div className="flex w-full border rounded-full overflow-hidden">
-            <input
-              type="text"
-              className="flex-1 outline-none px-4 py-4"
-              placeholder="Type your email address"
-            />
-            <button className="px-6 py-4 bg-black text-white text-sm font-semibold hover:scale-105 transition-all duration-150">
-              Subscribe Now
-            </button>
           </div>
         </div>
       </div>
