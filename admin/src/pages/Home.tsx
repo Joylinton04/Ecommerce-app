@@ -2,6 +2,7 @@ import React, { useState, type FormEvent } from "react";
 import { Input } from "../components/ui/input";
 import { CloudUpload } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import axios from "axios";
 import {
   Select,
   SelectContent,
@@ -14,41 +15,74 @@ import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
 
 const Home = () => {
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string[]>([]);
   const [category, setCategory] = useState<string>("");
   const [subCategory, setSubCategory] = useState<string>("");
-  const [price, setPrice] = useState<number>(0);
+  const [price, setPrice] = useState<number>();
   const sizes = ["S", "M", "L", "XL", "XXL"];
+  const [isLoading, setIsLoading] = useState(false);
 
   const [image1, setImage1] = useState<File | null>(null);
   const [image2, setImage2] = useState<File | null>(null);
   const [image3, setImage3] = useState<File | null>(null);
   const [image4, setImage4] = useState<File | null>(null);
 
-  const [productName, setProductName] = useState<string>();
-  const [desc, setDesc] = useState<string>();
+  const [productName, setProductName] = useState<string>("");
+  const [desc, setDesc] = useState<string>(
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas neque hic provident eum similique dolores ratione temporibus doloribus optio ab obcaecati, consectetur asperiores laborum beatae ea aperiam, animi cumque a."
+  );
+  const [bestSeller, setBestSeller] = useState<boolean>(false);
+  const [stock, setStock] = useState<number>();
 
-  const handleAddToProduct = (e: FormEvent) => {
+  const toggleSize = (size: string) => {
+    setSelectedSize((prev) =>
+      prev?.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
+    );
+  };
+
+  const handleAddToProduct = async (e: FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
 
-    if (productName) formData.append("productName", productName);
-    if (desc) formData.append("desc", desc);
-    if (selectedSize) formData.append("selectedSize", selectedSize);
+    if (productName) formData.append("name", productName);
+    if (desc) formData.append("description", desc);
+    if (selectedSize.length > 0)
+      formData.append("sizes", selectedSize.join(","));
     if (category) formData.append("category", category);
     if (subCategory) formData.append("subCategory", subCategory);
     if (price !== undefined) formData.append("price", price.toString());
+    if (stock !== undefined) formData.append("stock", stock.toString());
 
     if (image1) formData.append("image1", image1);
     if (image2) formData.append("image2", image2);
     if (image3) formData.append("image3", image3);
     if (image4) formData.append("image4", image4);
+    if (bestSeller)
+      formData.append("bestSeller", bestSeller ? "true" : "false");
 
-    // Properly log formData contents
-    for (const [key, value] of formData.entries()) {
-      console.log(key, value);
+    // // Properly log formData contents
+    // for (const [key, value] of formData.entries()) {
+    //   console.log(key, value);
+    // }
+
+    try {
+      setIsLoading(true);
+
+      const { data } = await axios.post(
+        "http://localhost:3000/api/product/add",
+        formData,
+        {
+          timeout: 50000,
+        }
+      );
+
+      data.success && toast.success("Product added");
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      toast.error("An error occurred");
+      console.log(err);
     }
-    toast("Product added to database")
   };
 
   return (
@@ -231,7 +265,10 @@ const Home = () => {
       <div className="flex gap-6">
         <div className="space-y-2">
           <label>Category</label>
-          <Select value={category} onValueChange={(value) => setCategory(value)}>
+          <Select
+            value={category}
+            onValueChange={(value) => setCategory(value)}
+          >
             <SelectTrigger className="w-[180px] shadow-none">
               <SelectValue placeholder="Select Category" />
             </SelectTrigger>
@@ -244,10 +281,7 @@ const Home = () => {
         </div>
         <div className="space-y-2">
           <label>Sub Category</label>
-          <Select
-            value={subCategory}
-            onValueChange={(v) => setSubCategory(v)}
-          >
+          <Select value={subCategory} onValueChange={(v) => setSubCategory(v)}>
             <SelectTrigger className="w-[180px] shadow-none">
               <SelectValue placeholder="Select Sub Category" />
             </SelectTrigger>
@@ -262,10 +296,21 @@ const Home = () => {
           <label>Product price</label>
           <Input
             type="number"
-            placeholder="0"
             value={price ?? ""}
             onChange={(e) =>
               setPrice(
+                e.target.value === "" ? undefined : Number(e.target.value)
+              )
+            }
+          />
+        </div>
+        <div className="space-y-2">
+          <label>Stock</label>
+          <Input
+            type="number"
+            value={stock ?? ""}
+            onChange={(e) =>
+              setStock(
                 e.target.value === "" ? undefined : Number(e.target.value)
               )
             }
@@ -280,10 +325,10 @@ const Home = () => {
           {sizes.map((s, i) => (
             <button
               key={i}
-              onClick={() => setSelectedSize(s)}
+              onClick={() => toggleSize(s)}
               className={`w-[61px] h-[61px] rounded-lg grid place-content-center text-sm font-medium 
               transition-all duration-200 border ${
-                selectedSize === s
+                selectedSize.includes(s)
                   ? "border-orange-500 bg-orange-50 text-orange-600"
                   : "border-gray-200 bg-[#FBFBFB] hover:border-orange-400"
               }`}
@@ -297,15 +342,32 @@ const Home = () => {
 
       {/* Bestseller */}
       <div className="inline-flex items-center gap-2">
-        <Checkbox id="bestseller" />
-        <label htmlFor="bestseller" className="block">
+        <Checkbox
+          id="bestseller"
+          checked={bestSeller}
+          onCheckedChange={(checked) => setBestSeller(checked === true)}
+        />
+
+        <label htmlFor="bestseller" className="ml-2">
           Add to bestseller
         </label>
       </div>
 
-      <div className="py-2">
-        <Button type="submit">ADD</Button>
+      <div className="py-3">
+        {isLoading ? (
+          <div className="loader"></div>
+        ) : (
+          <Button type="submit" disabled={isLoading}>
+            ADD
+          </Button>
+        )}
       </div>
+
+      {isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50">
+          <div className="w-12 h-12 border-4 border-white/30 border-t-orange-500 rounded-full animate-spin"></div>
+        </div>
+      )}
     </form>
   );
 };
