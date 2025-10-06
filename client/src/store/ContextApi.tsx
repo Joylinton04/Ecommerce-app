@@ -29,7 +29,12 @@ const AppContext = createContext<AppContextProps | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<string | null>("linton");
-  const [cartQuantity, setCartQuantity] = useState<number>(0);
+
+  const [cartQuantity, setCartQuantity] = useState<number>(() => {
+    const saved = localStorage.getItem("cartQuantity");
+    return saved ? JSON.parse(saved) : 0;
+  });
+
   const [cart, setCart] = useState<CartItem[]>(() => {
     const saved = localStorage.getItem("cart");
     return saved ? JSON.parse(saved) : [];
@@ -37,15 +42,21 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cartQuantity", JSON.stringify(cartQuantity));
   }, [cart]);
-  
+
   // useEffect(() => {
   //   // debounced backend sync logic
   // },[cart])
 
   const addToCart = ({ productId, quantity, size }: CartItem) => {
+    if (!size) {
+        toast.error("Please select a size");
+        return;
+      }
     setCart((prevCart) => {
       // check if product with same id & size exists
+
       const existingItem = prevCart.find(
         (item) => item.productId === productId && item.size === size
       );
@@ -62,7 +73,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         return [...prevCart, { productId, quantity, size }];
       }
     });
-    toast("Item added to cart successfully")
+    toast.success("Item added to cart successfully");
 
     setCartQuantity((cart) => Math.max(0, cart + 1));
   };
