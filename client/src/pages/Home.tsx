@@ -1,14 +1,19 @@
 import ProductTitle from "@/components/ProductTitle";
 import ProductCard from "@/components/ProductCard";
 import { motion } from "framer-motion";
-import { Bestsellers, latestProduct } from "@/store/data";
 import Section1 from "@/components/home/Section1";
 import Customers from "@/components/home/Customers";
 import FAQ from "@/components/home/FAQ";
 import CustomerReview from "@/components/home/CustomerReview";
+import { LoadingProducts } from "@/components/ProductSkeleton";
+import useProduct from "@/query/useProduct";
 
 const Home = () => {
   // const {user} = useAppContext();
+
+  // fetching data with react query
+
+  const { data, error, isLoading } = useProduct()
 
 
   const containerVariants = {
@@ -24,7 +29,7 @@ const Home = () => {
   return (
     <div className="w-full font-body">
       {/* section 1 */}
-      <Section1/>
+      <Section1 />
 
       {/* Latest Arrivals */}
       <div className="flex flex-col px-14 py-4 max-w-[1440px] mx-auto ssm:px-4">
@@ -39,15 +44,25 @@ const Home = () => {
           animate="show"
           className="flex flex-wrap gap-4 ssm:gap-8 mt-10"
         >
-          {latestProduct.map((product, index) => (
-            <ProductCard
-              key={index}
-              id={index}
-              img={product.img}
+          {
+            data?.slice(0,7).map((product) => (
+              <ProductCard
+              key={product._id}
+              id={product._id}
+              img={product.image[0]}
               price={product.price}
-              title={product.text}
-            />
-          ))}
+              title={product.name}
+              sizes={product.sizes}
+              />
+            ))
+          }
+          
+          {error && (
+            <p className="text-red-500">
+              Could not load Products: {error.message}
+            </p>
+          )}
+          <LoadingProducts isLoading={isLoading}/>
         </motion.div>
       </div>
 
@@ -63,26 +78,35 @@ const Home = () => {
           animate="show"
           className="flex flex-wrap gap-4 ssm:gap-8 mt-10"
         >
-          {Bestsellers.map((product, index) => (
-            <ProductCard
-              id={index}
-              key={index}
-              img={product.img}
+          {
+            data?.slice(7,14).map((product) => (
+              <ProductCard
+              key={product._id}
+              id={product._id}
+              img={product.image[0]}
               price={product.price}
-              title={product.text}
-            />
-          ))}
+              title={product.name}
+              sizes={product.sizes}
+              />
+            ))
+          }
+          <LoadingProducts isLoading={isLoading}/>
+          {error && (
+            <p className="text-red-500">
+              Could not load Products: {error.message}
+            </p>
+          )}
         </motion.div>
       </div>
 
       {/* section 3 */}
-      <Customers/>
+      <Customers />
 
       {/* FAQ */}
-      <FAQ/>
+      <FAQ />
 
       {/* customer review */}
-      <CustomerReview/>
+      <CustomerReview />
     </div>
   );
 };

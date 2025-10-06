@@ -29,7 +29,7 @@ const Cart = () => {
       price: 299.99,
       size: "L",
       image: assets.airForce,
-      quantity: 2,
+      quantity: 1,
     },
   ]);
 
