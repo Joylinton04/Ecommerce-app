@@ -105,10 +105,10 @@ const Contact = () => {
             {/* Socials */}
             <div className="flex gap-4 mt-4">
               {[
-                { icon: <Instagram size={18} />, label: "Instagram" },
-                { icon: <Facebook size={18} />, label: "Facebook" },
-                { icon: <Twitter size={18} />, label: "Twitter" },
-                { icon: <LinkedIn size={18} />, label: "LinkedIn" },
+                { icon: <Instagram fontSize="small" />, label: "Instagram" },
+                { icon: <Facebook fontSize="small" />, label: "Facebook" },
+                { icon: <Twitter fontSize="small" />, label: "Twitter" },
+                { icon: <LinkedIn fontSize="small" />, label: "LinkedIn" },
               ].map((social, i) => (
                 <div
                   key={i}
