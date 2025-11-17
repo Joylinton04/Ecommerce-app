@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, {
   createContext,
   useContext,
@@ -51,9 +52,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const addToCart = ({ productId, quantity, size }: CartItem) => {
     if (!size) {
-        toast.error("Please select a size");
-        return;
-      }
+      toast.error("Please select a size");
+      return;
+    }
     setCart((prevCart) => {
       // check if product with same id & size exists
 
@@ -84,6 +85,24 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     );
     setCartQuantity((cart) => Math.max(0, cart - 1));
   };
+
+
+  // const register = async ({ username, email, password }: registerProps) => {
+  //   try {
+  //     const res = await axios.post("http://localhost:3000/api/auth/", {
+  //       username,
+  //       email,
+  //       password,
+  //     });
+  //     if (res.data && res.data.success) {
+  //       return res;
+  //     }
+  //     return res;
+  //   } catch (err) {
+  //     console.log(err);
+  //     throw err;
+  //   }
+  // };
 
   return (
     <AppContext.Provider

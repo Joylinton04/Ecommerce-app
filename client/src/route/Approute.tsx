@@ -8,6 +8,7 @@ import Cart from "@/pages/Cart";
 import Order from "@/pages/Order";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
+import AuthForm from "@/pages/SignUp";
 
 const Approute = createBrowserRouter([
   {
@@ -44,5 +45,9 @@ const Approute = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/auth",
+    element: <AuthForm/>
+  }
 ]);
 export default Approute;
