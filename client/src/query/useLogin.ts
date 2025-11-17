@@ -15,7 +15,7 @@ export const useLogin = () => {
             email,
             password,
         });
-        return res.data;
+        return res.data
     };
 
     return useMutation({

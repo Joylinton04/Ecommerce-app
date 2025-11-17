@@ -14,12 +14,16 @@ const Home = () => {
   // fetching data with react query
 
   const { data, error, isLoading } = useProduct();
-  const { data: user } = useSessionUser();
+  const { data: user, isLoading: isLoadingSession } = useSessionUser();
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user) navigate("/auth");
-  }, []);
+  console.log(user)
+
+  // useEffect(() => {
+  //   if (isLoadingSession) return;
+  //   if (!user) navigate("/auth");
+  // }, [isLoadingSession,user]);
 
   const containerVariants = {
     hidden: { opacity: 1 },

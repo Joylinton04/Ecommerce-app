@@ -61,10 +61,12 @@ export default function AuthPage() {
       onSuccess: () => {
         handleToggle();
         navigate("/");
+        console.log("LoggedIn")
       },
       onError: (err: any) => {
         if (err) {
           setErrorMessage("Invalid credentials");
+          console.log(err)
         }
       },
     });
