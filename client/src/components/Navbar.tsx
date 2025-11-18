@@ -19,13 +19,13 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const handleLogOut = () => {
-    if (user) {
-      mutate();
-      console.log(user);
-    }else {
-      navigate("/auth")
-    }
-  };
+  if (user) {
+    mutate();
+  } else {
+    navigate("/auth");
+  }
+};
+
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,6 +45,7 @@ export default function AuthPage() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
+
   const signInForm = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: { email: "", password: "" },
@@ -61,12 +62,12 @@ export default function AuthPage() {
       onSuccess: () => {
         handleToggle();
         navigate("/");
-        console.log("LoggedIn")
+        console.log("LoggedIn");
       },
       onError: (err: any) => {
         if (err) {
           setErrorMessage("Invalid credentials");
-          console.log(err)
+          console.log(err);
         }
       },
     });

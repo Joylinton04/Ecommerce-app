@@ -28,7 +28,7 @@ const Product = () => {
   const sizes = ["M", "L", "XL", "XXL"];
 
   const { id } = useParams();
-  const { addToCart } = useAppContext();
+  const { addToCart, isLoadingCardAddition } = useAppContext();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["product"],
@@ -160,6 +160,7 @@ const Product = () => {
                   addToCart({ ...cartItem });
                 }}
                 className="font-medium bg-black w-[220px] h-[59px] rounded-full hover:bg-orange-600 transition-all"
+                disabled={isLoadingCardAddition}
               >
                 ADD TO CART
               </Button>

@@ -3,21 +3,25 @@ import axios from "axios";
 
 
 
-
 export const useLogOut = () => {
     const queryClient = useQueryClient();
 
     const logout = async () => {
-        const res = await axios.post("http://localhost:3000/api/auth/logout")
+        const res = await axios.post(
+            "http://localhost:3000/api/auth/logout",
+            {},
+            { withCredentials: true }
+        );
         return res.data;
     };
 
     return useMutation({
-        mutationFn: async () => {
-            await logout()
-        },
+        mutationFn: logout,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["authenticatedUser"] });
-        }
+            queryClient.invalidateQueries({
+                queryKey: ["authenticatedUser"],
+            });
+        },
     });
 };
+

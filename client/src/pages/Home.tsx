@@ -18,12 +18,11 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  console.log(user)
 
-  // useEffect(() => {
-  //   if (isLoadingSession) return;
-  //   if (!user) navigate("/auth");
-  // }, [isLoadingSession,user]);
+  useEffect(() => {
+    if (isLoadingSession) return;
+    if (!user) navigate("/auth");
+  }, [isLoadingSession,user]);
 
   const containerVariants = {
     hidden: { opacity: 1 },

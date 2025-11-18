@@ -15,12 +15,13 @@ const useSessionUser = () => {
     queryKey: ["authenticatedUser"],
     queryFn: async () => {
       const res = await axios.get<ResProps>(
-        `http://www.localhost:3000/api/auth/me`,
+        `http://localhost:3000/api/auth/me`,
         {
-          withCredentials: true,
+          withCredentials: true
         }
+        // credentials are not getting sent to the backend which is not authenticating users
       );
-      return res.data.user;
+      return res.data.authenticated;
     },
     // staleTime: 1000 * 60 * 5,
   });
