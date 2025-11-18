@@ -1,3 +1,5 @@
+import useAddToCart from "@/query/useAddToCart";
+import useSessionUser from "@/query/useSession";
 import axios from "axios";
 import React, {
   createContext,
@@ -24,12 +26,14 @@ interface AppContextProps {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
   removeFromCart: (productId: string) => void;
+  isLoadingCardAddition?: boolean
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<string | null>("linton");
+  const { mutate, isPending:isLoadingCardAddition } = useAddToCart();
 
   const [cartQuantity, setCartQuantity] = useState<number>(() => {
     const saved = localStorage.getItem("cartQuantity");
@@ -55,28 +59,40 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       toast.error("Please select a size");
       return;
     }
-    setCart((prevCart) => {
-      // check if product with same id & size exists
+    // request
 
-      const existingItem = prevCart.find(
-        (item) => item.productId === productId && item.size === size
-      );
+    mutate(
+      {productId, quantity,size},
+      {
+        onSuccess: () => {
+          setCart((prevCart) => {
+            // check if product with same id & size exists
 
-      if (existingItem) {
-        // update quantity
-        return prevCart.map((item) =>
-          item.productId === productId && item.size === size
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
-      } else {
-        // add new item
-        return [...prevCart, { productId, quantity, size }];
+            const existingItem = prevCart.find(
+              (item) => item.productId === productId && item.size === size
+            );
+
+            if (existingItem) {
+              // update quantity
+              return prevCart.map((item) =>
+                item.productId === productId && item.size === size
+                  ? { ...item, quantity: item.quantity + quantity }
+                  : item
+              );
+            } else {
+              // add new item
+              return [...prevCart, { productId, quantity, size }];
+            }
+          });
+
+          setCartQuantity((cart) => Math.max(0, cart + 1));
+          toast.success("Item added to cart successfully");
+        },
+        onError: (err: any) => {
+          toast.error(err.response.data.message || "Failed to add to cart");
+        },
       }
-    });
-    toast.success("Item added to cart successfully");
-
-    setCartQuantity((cart) => Math.max(0, cart + 1));
+    );
   };
 
   const removeFromCart = (productId: string) => {
@@ -85,24 +101,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     );
     setCartQuantity((cart) => Math.max(0, cart - 1));
   };
-
-
-  // const register = async ({ username, email, password }: registerProps) => {
-  //   try {
-  //     const res = await axios.post("http://localhost:3000/api/auth/", {
-  //       username,
-  //       email,
-  //       password,
-  //     });
-  //     if (res.data && res.data.success) {
-  //       return res;
-  //     }
-  //     return res;
-  //   } catch (err) {
-  //     console.log(err);
-  //     throw err;
-  //   }
-  // };
 
   return (
     <AppContext.Provider
@@ -114,6 +112,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         cart,
         addToCart,
         removeFromCart,
+        isLoadingCardAddition
       }}
     >
       {children}
